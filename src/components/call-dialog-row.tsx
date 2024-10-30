@@ -2,7 +2,7 @@ import React from "react";
 
 interface CallDialogRowProps {
   title: string;
-  value: string;
+  value: React.ReactNode;
 }
 
 export const CallDialogRow = ({
@@ -15,7 +15,7 @@ export const CallDialogRow = ({
         {title}
       </div>
       <div className="justify-start items-center gap-1 flex flex-1 capitalize">
-        <div className="text-zinc-600 text-base font-normal font-['Inter'] leading-none">
+        <div className={"text-zinc-600 text-base font-normal font-['Inter'] leading-none"}>
           {value}
         </div>
       </div>

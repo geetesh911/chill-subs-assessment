@@ -1,7 +1,12 @@
 import { Call } from "@/interfaces/call.interface";
 import { CallDialogRow } from "./call-dialog-row";
 import { DialogContent } from "./ui/dialog";
-import { getFormattedPeriod, getGenreValue, getStatusString } from "@/utils/call.util";
+import {
+  getFormattedPeriod,
+  getGenreValue,
+  getStatusString,
+} from "@/utils/call.util";
+import { ThemeIcon } from "./theme-icon";
 
 interface CallDialogContentProps {
   call: Call;
@@ -37,18 +42,28 @@ export const CallDialogContent = ({
             title="Reading periods"
             value={getFormattedPeriod(call.readingPeriod) || "-"}
           />
-          <CallDialogRow title="Theme" value={call.theme.title || "-"} />
+          <CallDialogRow
+            title="Theme"
+            value={
+              call.theme.title ? (
+                <>
+                  <ThemeIcon className="inline-block" />
+                  <span className={"text-blue-500 ml-2"}>
+                    {call.theme.title}
+                  </span>
+                </>
+              ) : (
+                "-"
+              )
+            }
+          />
           <CallDialogRow title="Fee" value={`$${call.fee.amount}`} />
           <CallDialogRow title="Pay" value={`$${call.payment.amount.lower}+`} />
           <CallDialogRow title="Genre" value={getGenreValue(call)} />
           <CallDialogRow title="Style" value={call.genreStyle} />
           <CallDialogRow
             title="Subgenres"
-            value={
-              call.subGenre.length > 0
-                ? call.subGenre.join(", ")
-                : "-"
-            }
+            value={call.subGenre.length > 0 ? call.subGenre.join(", ") : "-"}
           />
           <CallDialogRow
             title="Word count"
